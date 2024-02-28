@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище BMOModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EmpPost">
+          <Key>
+            <PropertyRef Name="EmpPost" />
+          </Key>
+          <Property Name="EmpPost" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Goods">
+          <Key>
+            <PropertyRef Name="GoodsId" />
+          </Key>
+          <Property Name="GoodsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Descrip" Type="varchar(max)" Nullable="false" />
+          <Property Name="Cost" Type="real" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="ImagePath" Type="varchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderGoods">
+          <Key>
+            <PropertyRef Name="OrderGoodsId" />
+          </Key>
+          <Property Name="GoodsId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="OrderGoodsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Us_login" Type="varchar" MaxLength="50" />
+          <Property Name="Us_password" Type="varchar(max)" />
+          <Property Name="EmpPost" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__OrderGood__Goods__4E88ABD4">
+          <End Role="Goods" Type="Self.Goods" Multiplicity="1" />
+          <End Role="OrderGoods" Type="Self.OrderGoods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goods">
+              <PropertyRef Name="GoodsId" />
+            </Principal>
+            <Dependent Role="OrderGoods">
+              <PropertyRef Name="GoodsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderGood__UserI__4F7CD00D">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="OrderGoods" Type="Self.OrderGoods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="OrderGoods">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__EmpPost__2F10007B">
+          <End Role="EmpPost" Type="Self.EmpPost" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpPost">
+              <PropertyRef Name="EmpPost" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="EmpPost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище BMOModelContainer">
+          <EntitySet Name="EmpPost" EntityType="Self.EmpPost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Goods" EntityType="Self.Goods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderGoods" EntityType="Self.OrderGoods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__OrderGood__Goods__4E88ABD4" Association="Self.FK__OrderGood__Goods__4E88ABD4">
+            <End Role="Goods" EntitySet="Goods" />
+            <End Role="OrderGoods" EntitySet="OrderGoods" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderGood__UserI__4F7CD00D" Association="Self.FK__OrderGood__UserI__4F7CD00D">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="OrderGoods" EntitySet="OrderGoods" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__EmpPost__2F10007B" Association="Self.FK__Users__EmpPost__2F10007B">
+            <End Role="EmpPost" EntitySet="EmpPost" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BMOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EmpPost">
+          <Key>
+            <PropertyRef Name="EmpPost1" />
+          </Key>
+          <Property Name="EmpPost1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__EmpPost__2F10007B" FromRole="EmpPost" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Goods">
+          <Key>
+            <PropertyRef Name="GoodsId" />
+          </Key>
+          <Property Name="GoodsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descrip" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cost" Type="Single" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="ImagePath" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="OrderGoods" Relationship="Self.FK__OrderGood__Goods__4E88ABD4" FromRole="Goods" ToRole="OrderGoods" />
+        </EntityType>
+        <EntityType Name="OrderGoods">
+          <Key>
+            <PropertyRef Name="OrderGoodsId" />
+          </Key>
+          <Property Name="GoodsId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="OrderGoodsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Goods" Relationship="Self.FK__OrderGood__Goods__4E88ABD4" FromRole="OrderGoods" ToRole="Goods" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__OrderGood__UserI__4F7CD00D" FromRole="OrderGoods" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Us_login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Us_password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmpPost" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EmpPost1" Relationship="Self.FK__Users__EmpPost__2F10007B" FromRole="Users" ToRole="EmpPost" />
+          <NavigationProperty Name="OrderGoods" Relationship="Self.FK__OrderGood__UserI__4F7CD00D" FromRole="Users" ToRole="OrderGoods" />
+        </EntityType>
+        <Association Name="FK__Users__EmpPost__2F10007B">
+          <End Role="EmpPost" Type="Self.EmpPost" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpPost">
+              <PropertyRef Name="EmpPost1" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="EmpPost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderGood__Goods__4E88ABD4">
+          <End Role="Goods" Type="Self.Goods" Multiplicity="1" />
+          <End Role="OrderGoods" Type="Self.OrderGoods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goods">
+              <PropertyRef Name="GoodsId" />
+            </Principal>
+            <Dependent Role="OrderGoods">
+              <PropertyRef Name="GoodsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderGood__UserI__4F7CD00D">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="OrderGoods" Type="Self.OrderGoods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="OrderGoods">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BMOEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EmpPost" EntityType="Self.EmpPost" />
+          <EntitySet Name="Goods" EntityType="Self.Goods" />
+          <EntitySet Name="OrderGoods" EntityType="Self.OrderGoods" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK__Users__EmpPost__2F10007B" Association="Self.FK__Users__EmpPost__2F10007B">
+            <End Role="EmpPost" EntitySet="EmpPost" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderGood__Goods__4E88ABD4" Association="Self.FK__OrderGood__Goods__4E88ABD4">
+            <End Role="Goods" EntitySet="Goods" />
+            <End Role="OrderGoods" EntitySet="OrderGoods" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderGood__UserI__4F7CD00D" Association="Self.FK__OrderGood__UserI__4F7CD00D">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="OrderGoods" EntitySet="OrderGoods" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище BMOModelContainer" CdmEntityContainer="BMOEntities">
+          <EntitySetMapping Name="EmpPost">
+            <EntityTypeMapping TypeName="BMOModel.EmpPost">
+              <MappingFragment StoreEntitySet="EmpPost">
+                <ScalarProperty Name="EmpPost1" ColumnName="EmpPost" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Goods">
+            <EntityTypeMapping TypeName="BMOModel.Goods">
+              <MappingFragment StoreEntitySet="Goods">
+                <ScalarProperty Name="GoodsId" ColumnName="GoodsId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Descrip" ColumnName="Descrip" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderGoods">
+            <EntityTypeMapping TypeName="BMOModel.OrderGoods">
+              <MappingFragment StoreEntitySet="OrderGoods">
+                <ScalarProperty Name="GoodsId" ColumnName="GoodsId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="OrderGoodsId" ColumnName="OrderGoodsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BMOModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Us_login" ColumnName="Us_login" />
+                <ScalarProperty Name="Us_password" ColumnName="Us_password" />
+                <ScalarProperty Name="EmpPost" ColumnName="EmpPost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

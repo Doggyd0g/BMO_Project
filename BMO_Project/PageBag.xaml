@@ -1,0 +1,80 @@
+﻿<Page x:Class="BMO_Project.PageBag"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BMO_Project"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageBag" Loaded="Page_Loaded">
+
+    <Grid Background="#FF51CE98">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Margin="10" Height="50" VerticalAlignment="Top" Grid.Row="0">
+            <TextBlock Text="Товары в корзине:" VerticalAlignment="Center" DockPanel.Dock="Left" FontSize="25" FontWeight="SemiBold"></TextBlock>
+            <Button Height="30" FontSize="15" Content="Очистить список" Background="#FFCFE0F0" Foreground="#FF136151" HorizontalAlignment="Right" Click="bt_delall_Click"/>
+        </DockPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+            <ItemsControl Name="order_list">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel HorizontalAlignment="Stretch"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="120" Margin="5" Background="#FFCDDFF0" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width=".3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Image Source="{Binding Goods.ImagePath}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"/>
+                            <TextBlock Text="{Binding Goods.Title}" FontSize="18" FontWeight="Bold" Margin="5" Height="25" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1"/>
+                            <TextBlock Text="{Binding Goods.Descrip}" FontSize="13" Margin="5" TextWrapping="Wrap" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"/>
+                            <TextBox Text="{Binding Amount}" Tag="{Binding OrderGoodsId}" Height="31" FontWeight="UltraBold" FontSize="15" 
+                             Grid.Row="1" Grid.Column="4" HorizontalContentAlignment="Center" VerticalAlignment="Center" PreviewTextInput="NumberValidationTextBox" />
+                            <TextBlock Text="{Binding Goods.Cost}" Height="24" FontSize="15" FontWeight="UltraBold" TextAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" />
+                            <TextBlock Text="$ X " Height="24" FontSize="15" FontWeight="UltraBold" TextAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.Row="1" />
+                            <Button Grid.Column="5" Grid.Row="0" Grid.RowSpan="3" Height="50" Width="50" Background="#FF34C0A3" Tag="{Binding OrderGoodsId}" Click="bt_del_Click">
+                                <Image Source="\Pictures\Rubber.png"/>
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <Border HorizontalAlignment="Center"  Background="#FF136151" Margin="10" Width="500" Height="50" Grid.Row="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".5*"/>
+                    <ColumnDefinition Width=".5*"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Наименований:" FontSize="15" Foreground="AliceBlue" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <TextBlock x:Name="tb_count" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="1" Grid.RowSpan="2" Foreground="AntiqueWhite" />
+                <TextBlock Text="Сумма:" FontSize="15" Grid.Column="1" Foreground="AliceBlue" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <TextBlock x:Name="tb_allcount" FontSize="15" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="1" Foreground="AntiqueWhite" />
+                <Button FontSize="15" Margin="5" Grid.Column="2" Grid.RowSpan="2" Height="30" Width="160" Background="#FFCFE0F0" Content="Оформить" Foreground="#FF136151" Click="bt_orreg_Click"  />
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

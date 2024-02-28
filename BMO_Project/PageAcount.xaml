@@ -1,0 +1,34 @@
+﻿<Page x:Class="BMO_Project.PageAcount"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BMO_Project"
+      mc:Ignorable="d" 
+      d:DesignHeight="380" d:DesignWidth="320"
+      Title="Registration">
+    <Grid Background="#FF136151">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="10*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="1" Grid.Row="1" BorderBrush="AliceBlue" BorderThickness="2" CornerRadius="5" OpacityMask="AliceBlue">
+            <StackPanel Margin="0 5 0 0">
+                <Image Source="\Pictures\NoPhoto.png" HorizontalAlignment="Center" Height="90" Width="110" />
+                <TextBlock Text="Логин" Name="tb_login" Foreground="AliceBlue" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy"/>
+                <TextBlock Margin="10" Height="25" FontSize="14"  Text="Недавние покупки:" FontWeight="Bold" Foreground="AliceBlue"/>
+                <TextBlock Margin="10 0 0 0" Height="25" FontSize="14"  Text="-- (Ромка не забудь доделать)" Foreground="AliceBlue"/>
+                <TextBlock Margin="10 0 0 0" Height="25" FontSize="14"  Text="-- (во имя пролетариата)"  Foreground="AliceBlue"/>
+                <TextBlock Margin="10 0 0 0" Height="30" FontSize="14"  Text="--          (＾▽＾)"  Foreground="AliceBlue"/>
+                <Button Height="30" Width="80" Margin="5" FontSize="15" FontWeight="UltraLight" Foreground="White" Background="#FF34C0A3" Click="Button_Click" >Выйти</Button>
+                <TextBlock FontSize="9" HorizontalAlignment="Center" FontWeight="Medium" Foreground="#FF78938E" >Ну и выходи, Лох</TextBlock>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>
